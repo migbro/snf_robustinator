@@ -30,6 +30,7 @@ headers = open('permuted_samples_' + str(k) + 'x.txt', 'w')
 data = data.astype(np.str)
 # Will permute with header column, but then replace with original to satisfy software while still tracking rearranged
 #  indices
+out = 'permutation_res.txt'
 for i in xrange(1, (k+1), 1):
     new = np.transpose(np.random.permutation(np.transpose(data)))
     headers.write(str(i) + '\t' + '\t'.join(new[0]) + '\n')
@@ -41,7 +42,7 @@ for i in xrange(1, (k+1), 1):
         cur.write(Genes[j] + '\t' + '\t'.join(values) + '\n')
         j += 1
     cur.close()
-    out = 'permutation_res' + str(i) + '.txt'
+
     # run snf on scrambled data set
-    rcmd = 'Rscript ' + runSNF + ' ' + eset1 + ' eset2_permutated.txt ' + out
+    rcmd = 'Rscript ' + runSNF + ' ' + eset1 + ' eset2_permutated.txt ' + out + ' ' + str(i)
     subprocess.call(rcmd, shell=True)

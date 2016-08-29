@@ -76,12 +76,13 @@ args <- commandArgs(TRUE)
 eset1 = args[1]
 eset2 = args[2]
 out = args[3]
+i = args[4]
 eset.mrna <- readEset(eset1)
 eset.mir <- readEset(eset2)
 
 group <- runSNF(eset.mrna, eset.mir)
-write(group, file=out)
-## print out sessionInfo.
-sessionInfo()
-
+g_as_string = toString(group)
+g_as_string = gsub(", ", "\t", g_as_string)
+g_as_string = paste(i, g_as_string, sep="\t")
+write(g_as_string, file=out,  append=TRUE)
 
