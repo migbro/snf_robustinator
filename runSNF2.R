@@ -60,7 +60,7 @@ runSNF <- function(M1, M2, ...) {
 
 packages <- c("readr", "dplyr", "SNFtool")
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-    install.packages(setdiff(packages, rownames(installed.packages())))  
+    install.packages(setdiff(packages, rownames(installed.packages())))
 }
 
 suppressPackageStartupMessages({
@@ -72,12 +72,15 @@ suppressPackageStartupMessages({
 ## the above functions can be saved in another R script
 ## and source to the current R session, e.g.
 ## source("foo.R")
-
-eset.mrna <- readEset("eset_mrna.xls")
-eset.mir <- readEset("eset_mir.xls")
+args <- commandArgs(TRUE)
+eset1 = args[1]
+eset2 = args[2]
+out = args[3]
+eset.mrna <- readEset(eset1)
+eset.mir <- readEset(eset2)
 
 group <- runSNF(eset.mrna, eset.mir)
-group
+write(group, file=out)
 ## print out sessionInfo.
 sessionInfo()
 
