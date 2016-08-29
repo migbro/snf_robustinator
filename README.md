@@ -9,3 +9,5 @@ Iterate over a standard SNF clustering algorithm permutating coulmn data per ite
 ####temp_eset2_permutated.txt: A temp file with permutated data that is overwritten each iteration
 ####permutation_res.txt: Table with cluster results of permutation.  First column indicates permutation number, the rest are the the cluster membership values.  With is to be used in conjunction with permutated_samples_{n}x.txt
 ####permuted_samples_{n}x.txt: Table with sample ordering for each iteration.
+
+#####Note: R script written by Lei Huang from CRI, modified y M Brown
