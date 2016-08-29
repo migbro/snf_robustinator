@@ -4,6 +4,14 @@ import sys
 import numpy as np
 import subprocess
 import pdb
+import time
+
+
+def date_time():
+    cur_date = ">" + time.strftime("%c") + '\n'
+    return cur_date
+
+
 if len(sys.argv) < 2:
     sys.stderr.write('Usage: ' + sys.argv[0] + ' {table to permute} {iterations} {table to not permute}\n')
     exit(1)
@@ -20,7 +28,7 @@ Genes = []
 data = np.array(Samples[1:], dtype=str)
 
 # create data matrix, initialize as size of head
-
+sys.stderr.write(date_time() + 'Reading table to permute into memory ' + eset2 + '\n')
 for line in tbl:
     info = line.rstrip('\n').split('\t')
     Genes.append(info[0])
@@ -31,7 +39,9 @@ data = data.astype(np.str)
 # Will permute with header column, but then replace with original to satisfy software while still tracking rearranged
 #  indices
 out = 'permutation_res.txt'
+sys.stderr.write(date_time() + 'Permuting table. ' + str(k) + ' iterations indicated\n')
 for i in xrange(1, (k+1), 1):
+    sys.stderr.write(date_time() + 'At iteration ' + str(i) + '\n')
     new = np.transpose(np.random.permutation(np.transpose(data)))
     headers.write(str(i) + '\t' + '\t'.join(new[0]) + '\n')
     new = np.delete(new, (0), axis=0)
@@ -44,5 +54,6 @@ for i in xrange(1, (k+1), 1):
     cur.close()
 
     # run snf on scrambled data set
-    rcmd = 'Rscript ' + runSNF + ' ' + eset1 + ' eset2_permutated.txt ' + out + ' ' + str(i)
+    rcmd = 'Rscript ' + runSNF + ' ' + eset1 + ' temp_eset2_permutated.txt ' + out + ' ' + str(i)
     subprocess.call(rcmd, shell=True)
+sys.stderr.write(date_time() + 'Permutations complete!\n')
