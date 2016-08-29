@@ -3,7 +3,7 @@
 Iterate over a standard SNF clustering algorithm permutating coulmn data per iteration to prove algorithm and result robustness
 ## Usage:
 ```
-./scrambler.py {table to scramble} {number of iterations} {table to keep fixed} 2> log.txt
+./scrambler.py {table to scramble} {number of iterations} {table to keep fixed} { R script location} 2> log.txt
 ```
 ##Outputs:
 ####temp_eset2_permutated.txt: A temp file with permutated data that is overwritten each iteration

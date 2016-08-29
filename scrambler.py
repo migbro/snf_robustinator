@@ -13,13 +13,15 @@ def date_time():
 
 
 if len(sys.argv) < 2:
-    sys.stderr.write('Usage: ' + sys.argv[0] + ' {table to permute} {iterations} {table to not permute}\n')
+    sys.stderr.write('Usage: ' + sys.argv[0] + ' {table to permute} {iterations} {table to not permute} '
+                                               '{ R script location}\n')
     exit(1)
-runSNF = '/Users/Miguel/Documents/Scripts/white_lab/snf_robustinator/runSNF2.R'
+
 eset2 = sys.argv[1]
 tbl = open(eset2, 'r')
 k = int(sys.argv[2])
 eset1 = sys.argv[3]
+runSNF = sys.argv[4]
 
 Samples = next(tbl)
 Samples = Samples.rstrip('\n').split('\t')
