@@ -41,13 +41,14 @@ data = data.astype(np.str)
 # Will permute with header column, but then replace with original to satisfy software while still tracking rearranged
 #  indices
 out = 'permutation_res.txt'
+temp_fn = 'temp_eset2_permutated.txt'
 sys.stderr.write(date_time() + 'Permuting table. ' + str(k) + ' iterations indicated\n')
 for i in xrange(1, (k+1), 1):
     sys.stderr.write(date_time() + 'At iteration ' + str(i) + '\n')
     new = np.transpose(np.random.permutation(np.transpose(data)))
     headers.write(str(i) + '\t' + '\t'.join(new[0]) + '\n')
     new = np.delete(new, (0), axis=0)
-    cur = open('eset2_permutated.txt', 'w')
+    cur = open(temp_fn, 'w')
     cur.write('\t'.join(Samples) + '\n')
     j = 0
     for values in new:
@@ -56,6 +57,6 @@ for i in xrange(1, (k+1), 1):
     cur.close()
 
     # run snf on scrambled data set
-    rcmd = 'Rscript ' + runSNF + ' ' + eset1 + ' temp_eset2_permutated.txt ' + out + ' ' + str(i)
+    rcmd = 'Rscript ' + runSNF + ' ' + eset1 + ' ' + temp_fn + ' ' + out + ' ' + str(i)
     subprocess.call(rcmd, shell=True)
 sys.stderr.write(date_time() + 'Permutations complete!\n')
