@@ -51,8 +51,9 @@ for sample in perm_slist:
     cur.close()
     r_cmd = "Rscript " + r_script + ' temp_table.txt ' + c_data[0]
     check = subprocess.call(r_cmd, shell=True)
-    if check == 0:
+    if check != 0:
         sys.stderr.write('Failed at iteration ' + str(n) + '\n' + r_cmd + '\n')
+        exit(1)
     n += 1
 perm_clist.close()
 perm_slist.close()
