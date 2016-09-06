@@ -1,9 +1,16 @@
+suppressPackageStartupMessages({
+    library(survival)
+})
+args <- commandArgs(TRUE)
 
-snf_death_censor_RNAseq_results$SurvObj <- with(snf_death_censor_RNAseq_results, Surv(time=snf_death_censor_RNAseq_results$Follow.up.Time.or.Time.to.Death..y., snf_death_censor_RNAseq_results$Death..Yes.1. == 1, type="right"))
-km.by.snf <- survfit(SurvObj ~ SNF.group, data = snf_death_censor_RNAseq_results, conf.type="log-log"
+km_test <- read.delim(args[1], quote="")
+km_i = args[2]
 km_test$SurvObj <- with(km_test, Surv(time=km_test$censor, km_test$death == 1, type="right"))
-test.by.snf <- survfit(SurvObj ~ snf_clust, data = km_test, conf.type="log-log")
-survdiff(formula = snf_death_censor_RNAseq_results$SurvObj ~ snf_death_censor_RNAseq_results$SNF.group)
 survdiff(formula = km_test$SurvObj ~ km_test$snf_clust)
 result = survdiff(formula = km_test$SurvObj ~ km_test$snf_clust)
-pchisq(result$chisq, length(result$n)-1, lower.tail = FALSE)
+pval = pchisq(result$chisq, length(result$n)-1, lower.tail = FALSE)
+work = paste("km_iter_", km_i, "workspace.Rdata")
+out_fn = "KM_pvals.txt"
+out_res = paste(km_i, toString(result), sep="\t")
+write(out_res, file=out_fn,  append=TRUE)
+save.image(file=work)
