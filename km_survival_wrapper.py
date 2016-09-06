@@ -2,7 +2,13 @@
 
 import sys
 import subprocess
-from scrambler import date_time
+import time
+
+
+def date_time():
+    cur_date = ">" + time.strftime("%c") + '\n'
+    return cur_date
+
 
 if len(sys.argv) < 5:
     sys.stderr.write('Usage: ' + sys.argv[0] + ' {source cluster data}{km survival r script location}'
@@ -10,8 +16,8 @@ if len(sys.argv) < 5:
     exit(1)
 source_clust = open(sys.argv[1], 'r')
 r_script = sys.argv[2]
-perm_slist = sys.argv[3]
-perm_clist = sys.argv[4]
+perm_slist = open(sys.argv[3], 'r')
+perm_clist = open(sys.argv[4], 'r')
 head = next(source_clust)
 head = head.rstrip('\n').split('\t')
 info_dict = {}
@@ -48,4 +54,6 @@ for sample in perm_slist:
     if check == 0:
         sys.stderr.write('Failed at iteration ' + str(n) + '\n' + r_cmd + '\n')
     n += 1
+perm_clist.close()
+perm_slist.close()
 sys.stderr.write(date_time() + 'P-value tabulation of permutation results completed\n')
