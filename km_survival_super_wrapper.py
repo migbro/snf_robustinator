@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
+import sys
 import os
 from job_manager import job_manager
-from km_survival_wrapper import *
+
 
 if len(sys.argv) < 5:
     sys.stderr.write('Usage: ' + sys.argv[0] + ' {km survival r script location}'
