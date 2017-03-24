@@ -23,6 +23,6 @@ for line in tbl:
     wd = '_'.join((K, alpha, T))
     source_clust = cwd + '/' + wd + '.txt'
     cmd = 'cd ' + cwd + '; mkdir ' + wd + ';cd ' + wd + ';'
-    cmd += km_survival_wrapper + ' '.join((source_clust, r_script, perm_slist, perm_clist, K, alpha, T)) + ';'
+    cmd += km_survival_wrapper + ' ' + ' '.join((source_clust, r_script, perm_slist, perm_clist, K, alpha, T)) + ';'
     job_list.append(cmd)
 job_manager(job_list, '8')
