@@ -60,6 +60,7 @@ for i in xrange(1, (k+1), 1):
     cur.close()
 
     # run snf on scrambled data set
-    rcmd = 'Rscript ' + runSNF + ' ' + eset1 + ' ' + temp_fn + ' ' + out + ' ' + str(i) + ' '.join((K, alpha, T))
+    rcmd = 'Rscript ' + runSNF + ' ' + eset1 + ' ' + temp_fn + ' ' + out + ' ' + str(i) + ' ' + ' '.join((K, alpha, T))
+    sys.stderr.write(rcmd + '\n')
     subprocess.call(rcmd, shell=True)
 sys.stderr.write(date_time() + 'Permutations complete!\n')
