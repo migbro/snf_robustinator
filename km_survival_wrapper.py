@@ -18,6 +18,10 @@ source_clust = open(sys.argv[1], 'r')
 r_script = sys.argv[2]
 perm_slist = open(sys.argv[3], 'r')
 perm_clist = open(sys.argv[4], 'r')
+# SNF params
+K = sys.argv[5]
+alpha = sys.argv[6]
+T = sys.argv[7]
 head = next(source_clust)
 head = head.rstrip('\n').split('\t')
 info_dict = {}
@@ -49,7 +53,7 @@ for sample in perm_slist:
         pname = s_data[i]
         cur.write(pname + '\t' + c_data[i] + '\t' + info_dict[pname][head[2]] + '\t' + info_dict[pname][head[3]] + '\n')
     cur.close()
-    r_cmd = "Rscript " + r_script + ' temp_table.txt ' + c_data[0]
+    r_cmd = "Rscript " + r_script + ' temp_table.txt ' + c_data[0] + ' '.join((K, alpha, T))
     check = subprocess.call(r_cmd, shell=True)
     if check != 0:
         sys.stderr.write('Failed at iteration ' + str(n) + '\n' + r_cmd + '\n')

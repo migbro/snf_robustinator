@@ -22,17 +22,17 @@ readEset <- function(fn){
 ## Output: a numeric vector of cluster memberships,
 ##         where names of the vector are the sample IDs
 ##------------------------------------------------
-runSNF <- function(M1, M2, ...) {
+runSNF <- function(M1, M2, K, alpha, T) {
     # Check if the sample IDs are matched in both matrices!")
     stopifnot(identical(colnames(M1), colnames(M2)))
     ## transpose data matrix to allow the rows are samples 
     ## and columns are genes/mirnas
     eset1 <- t(M1)
     eset2 <- t(M2)
-    ## fix SNF parameters
-    K = 20;  	# number of neighbors, usually (10~30)
-    alpha = 0.5;  	# hyperparameter, usually (0.3~0.8)
-    T = 20; 	# Number of Iterations, usually (10~20)
+    ## SNF parameters given as args
+    # K = 20;  	# number of neighbors, usually (10~30)
+    # alpha = 0.5;  	# hyperparameter, usually (0.3~0.8)
+    # T = 20; 	# Number of Iterations, usually (10~20)
     ## normalize the input matrix
     dat1 <- standardNormalization(eset1)
     dat2 <- standardNormalization(eset2)
@@ -77,10 +77,13 @@ eset1 = args[1]
 eset2 = args[2]
 out = args[3]
 i = args[4]
+K = as.numeric(args[5])
+alpha = as.numeric(args[6])
+T = as.numeric(args[7])
 eset.mrna <- readEset(eset1)
 eset.mir <- readEset(eset2)
 
-group <- runSNF(eset.mrna, eset.mir)
+group <- runSNF(eset.mrna, eset.mir, K, alpha, T)
 g_as_string = toString(group)
 g_as_string = gsub(", ", "\t", g_as_string)
 g_as_string = paste(i, g_as_string, sep="\t")
