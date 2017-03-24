@@ -50,7 +50,7 @@ for i in xrange(1, (k+1), 1):
     sys.stderr.write(date_time() + 'At iteration ' + str(i) + '\n')
     new = np.transpose(np.random.permutation(np.transpose(data)))
     headers.write(str(i) + '\t' + '\t'.join(new[0]) + '\n')
-    new = np.delete(new, (0), axis=0)
+    new = np.delete(new, 0, axis=0)
     cur = open(temp_fn, 'w')
     cur.write('\t'.join(Samples) + '\n')
     j = 0

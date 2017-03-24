@@ -22,7 +22,7 @@ readEset <- function(fn){
 ## Output: a numeric vector of cluster memberships,
 ##         where names of the vector are the sample IDs
 ##------------------------------------------------
-runSNF <- function(M1, M2, K, alpha, T) {
+runSNF <- function(M1, M2, K, alpha, T, ...) {
     # Check if the sample IDs are matched in both matrices!")
     stopifnot(identical(colnames(M1), colnames(M2)))
     ## transpose data matrix to allow the rows are samples 
