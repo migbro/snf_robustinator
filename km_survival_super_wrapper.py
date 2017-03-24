@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 from job_manager import job_manager
 from km_survival_wrapper import *
