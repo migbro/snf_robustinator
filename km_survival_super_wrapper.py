@@ -21,8 +21,8 @@ for line in tbl:
     (K, alpha, T) = params[0:3]
     wd = '_'.join((K, alpha, T))
     source_clust = cwd + '/' + wd + '.txt'
-    perm_slist = cwd + '/permuted_samples_1000x.txt'
-    perm_clist = cwd + '/permutation_res.txt'
+    perm_slist = 'permuted_samples_1000x.txt'
+    perm_clist = 'permutation_res.txt'
     cmd = 'cd ' + cwd + '/' + wd + ';'
     cmd += km_survival_wrapper + ' ' + ' '.join((source_clust, r_script, perm_slist, perm_clist)) + ';'
     job_list.append(cmd)
