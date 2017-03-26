@@ -18,7 +18,7 @@ head = next(tbl)
 job_list = []
 for line in tbl:
     params = line.rstrip('\n').split('\t')
-    (K, alpha, T) = params[1:3]
+    (K, alpha, T) = params[0:3]
     wd = '_'.join((K, alpha, T))
     source_clust = cwd + '/' + wd + '.txt'
     perm_slist = cwd + '/permuted_samples_1000x.txt'
