@@ -23,7 +23,7 @@ for line in tbl:
     source_clust = cwd + '/' + wd + '.txt'
     perm_slist = cwd + '/permuted_samples_1000x.txt'
     perm_clist = cwd + '/permutation_res.txt'
-    cmd = 'cd ' + wd + ';'
+    cmd = 'cd ' + cwd + '/' + wd + ';'
     cmd += km_survival_wrapper + ' ' + ' '.join((source_clust, r_script, perm_slist, perm_clist)) + ';'
     job_list.append(cmd)
 job_manager(job_list, '8')
