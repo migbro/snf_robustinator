@@ -30,7 +30,8 @@ for line in source_clust:
     for i in xrange(1, len(head), 1):
         info_dict[data[0]][head[i]] = data[i]
 source_clust.close()
-
+dir_cmd = 'mkdir r_workspaces'
+subprocess.call(dir_cmd, shell=True)
 r_cmd = "Rscript " + r_script + ' ' + sys.argv[1] + ' 0'
 check = subprocess.call(r_cmd, shell=True)
 if check != 0:
